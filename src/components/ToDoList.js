@@ -1,15 +1,39 @@
-import React from 'react';
-import ToDo from './ToDo';
+import React, { useState, useEffect } from 'react';
+import Day from './Day/Day';
 
-const ToDoList = (props) => {
-  const { toDos } = props;
+const ToDoList = props => {
+  const { firebaseService } = props;
+
+  const [toDos, setToDos] = useState();
+
+  useEffect(() => {
+    getToDos();
+  }, []);
+
   return (
-    <div>
-      { toDos.map(toDo => 
-        <ToDo key={toDo.id} text={toDo.text} date={toDo.date} />
-      )}
-    </div>
+    <>
+      {toDos &&
+        Object.keys(toDos).map(date => (
+          <Day key={date} date={date} toDos={toDos[date]} />
+        ))}
+    </>
   );
+
+  async function getToDos() {
+    const docs = await firebaseService.getTodos();
+    const toDos = toDosByDate(docs);
+    setToDos(toDos);
+  }
+
+  function toDosByDate(toDos) {
+    const mappedToDos = {};
+    toDos.forEach(toDo => {
+      toDo = { id: toDo.id, ...toDo.data() };
+      const date = toDo.date.toDate().toDateString();
+      (mappedToDos[date] = mappedToDos[date] || []).push(toDo);
+    });
+    return mappedToDos;
+  }
 };
 
 export default ToDoList;

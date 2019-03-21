@@ -1,23 +1,86 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  width: 414px;
+  margin: 0 auto;
+  outline: 1px solid red;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-.todo {
-  display: flex;
-  
+.todo-list {
+  padding-top: 0.4em;
+  background: #1788aa;
+  height: 100%;
 }
 
-input[type=checkbox]:checked + .todo-text {
+.todo-list.hidden,
+.todo-list.hidden * {
+  display: none;
+}
+
+.todo {
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  height: 2.5em;
+}
+
+.todo-form {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 414px;
+  background: #1788aa;
+  border: 1px solid black;
+  height: 3em;
+  font-size: 1em;
+  padding: 0.5em;
+  margin: 0px;
+  border-radius: 0;
+}
+
+.todo-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5em;
+}
+
+.todo-save {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 4em;
+  background: #1788aa;
+  padding: 0;
+  border: 0;
+}
+
+.date {
+  font-size: 1.2em;
+  padding: 0.4em 0;
+  color: #fff;
+  background: #000;
+}
+
+.date,
+.todo-list > div {
+  padding-left: 0.4em;
+}
+
+input[type='checkbox']:checked + .todo-text {
   text-decoration: line-through;
 }

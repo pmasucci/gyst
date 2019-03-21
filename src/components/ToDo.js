@@ -1,11 +1,11 @@
 import React from 'react';
 
 const ToDo = props => {
-  const { text, date } = props;
+  const { text } = props;
   return (
-    <div class="todo">
-        <input type="checkbox" />
-        <div class="todo-text">{text}</div>
+    <div className='todo'>
+      <input type='checkbox' />
+      <div className='todo-text'>{text}</div>
     </div>
   );
 };
