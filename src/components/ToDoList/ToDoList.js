@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Day from './Day/Day';
+import Day from '../Day/Day';
 
 const ToDoList = props => {
   const { firebaseService } = props;

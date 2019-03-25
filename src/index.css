@@ -6,10 +6,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #1c68a7;
 }
 
 #root {
   width: 414px;
+  height: 100vh;
   margin: 0 auto;
   outline: 1px solid red;
 }
@@ -19,9 +21,29 @@ code {
     monospace;
 }
 
+.header {
+  display: flex;
+  height: 4em;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-todo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4em;
+  width: 4em;
+}
+
+.title {
+  font-size: 2em;
+  text-transform: uppercase;
+  font-family: 'Garamond';
+  padding: 0.5em;
+}
+
 .todo-list {
-  padding-top: 0.4em;
-  background: #1788aa;
   height: 100%;
 }
 
@@ -38,11 +60,24 @@ code {
   height: 2.5em;
 }
 
-.todo-form {
+.todo:nth-child(odd) {
+  background-color: #1d6eb1;
+}
+
+.todo-form-container {
+  position: absolute;
+  height: calc(100vh - 4em);
+  width: 414px;
+  background-color: #1c68a7;
+  padding-top: 4em;
+}
+
+.todo-form,
+.todo-form-date {
+  background-color: #1c68a7;
   box-sizing: border-box;
   width: 100%;
   max-width: 414px;
-  background: #1788aa;
   border: 1px solid black;
   height: 3em;
   font-size: 1em;
@@ -64,9 +99,9 @@ code {
   align-items: center;
   width: 100%;
   height: 4em;
-  background: #1788aa;
   padding: 0;
   border: 0;
+  background-color: #1c68a7;
 }
 
 .date {
