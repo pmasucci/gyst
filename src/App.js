@@ -1,32 +1,12 @@
-import React, { useState } from 'react';
-import Header from './components/Header/Header';
-import ToDoList from './components/ToDoList/ToDoList';
-import ToDoForm from './components/ToDoForm/ToDoForm';
-import { FirebaseContext } from './components/Firebase';
-// import { toDos } from './mockData';
-import './App.css';
+import React from "react";
+import { useAuthState } from "./context/AuthContext";
+import UnauthenticatedApp from "./components/UnauthenticatedApp";
+import AuthenticatedApp from "./components/AuthenticatedApp";
+import "./App.css";
 
 const App = () => {
-  const [formVisible, setFormVisibility] = useState(false);
-  function toggleFormVisibility() {
-    setFormVisibility(!formVisible);
-  }
-  return (
-    <>
-      <Header toggleFormVisibility={toggleFormVisibility} />
-      <FirebaseContext.Consumer>
-        {service => (
-          <>
-            <ToDoForm
-              formVisible={formVisible}
-              setFormVisibility={setFormVisibility}
-            />
-            <ToDoList firebaseService={service} />
-          </>
-        )}
-      </FirebaseContext.Consumer>
-    </>
-  );
+  const auth = useAuthState();
+  return <>{auth.user ? <AuthenticatedApp /> : <UnauthenticatedApp />}</>;
 };
 
 export default App;
