@@ -1,20 +1,28 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
 import authService from "../services/auth.service";
+import { useAuthDispatch } from "../context/AuthContext";
 
-const Register = ({ className }) => {
+const Register = ({ className, history }) => {
   const [form, setForm] = useState({});
+  const dispatch = useAuthDispatch();
 
   function handleChange(event) {
     setForm({ ...form, [event.target.name]: event.target.value });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     if (form.password === form.confirmPassword) {
-      authService.register(form.email, form.password);
+      try {
+        const user = await authService.register(form.email, form.password);
+        dispatch({ type: "login", user: user.data });
+        history.push("/");
+      } catch (error) {
+        console.error(error);
+      }
     } else {
-      console.log("passwords must match");
+      console.error("passwords must match");
     }
   }
   return (

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 const AuthenticatedApp = () => {
   return (
     <Router>
-      <Route exact path="/" component={Timeline} />
+      <Route default component={Timeline} />
     </Router>
   );
 };
