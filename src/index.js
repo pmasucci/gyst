@@ -3,13 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
+import { FirebaseProvider } from "./context/FirebaseContext";
 import * as serviceWorker from "./serviceWorker";
 
 const Index = () => {
   return (
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <FirebaseProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </FirebaseProvider>
   );
 };
 

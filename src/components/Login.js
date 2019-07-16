@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
-import authService from "../services/auth.service";
 import { useAuthDispatch } from "../context/AuthContext";
+import { useFirebase } from "../context/FirebaseContext";
 import { Link } from "react-router-dom";
 
 const Login = ({ className, history }) => {
   const [form, setForm] = useState({});
   const dispatch = useAuthDispatch();
+  const firebase = useFirebase();
 
   function handleChange(event) {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -14,9 +15,9 @@ const Login = ({ className, history }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const response = await authService.login(form.email, form.password);
-    if (response && response.status === 200) {
-      dispatch({ type: "login", user: response.data.user });
+    const response = await firebase.login(form.email, form.password);
+    if (response) {
+      dispatch({ type: "login", user: response.user });
     }
   }
 
